@@ -1,3 +1,4 @@
+# This Project is under active development 🚧
 # 🍽️ ProTeen
 
 [![Python 3.x](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/downloads/)
@@ -19,6 +20,7 @@ The script requires the input CSV file to be separated by a **semicolon (`;`)** 
 | **TITLE** | The name of the meal/dish. | `Paneer Tikka Masala` |
 | **TOTAL_HOURS** | The duration of the event (as a float). | `1.5` (for 1 hour 30 mins) |
 | **CATEGORY** | Must be one of: `Breakfast`, `Lunch`, or `Dinner`. | `Dinner` |
+| **INGREDIENTS** | List of ingredients separated by commas. | `Paneer, Onion, Tomato` |
 
 ## 🗓️ Importing to Apple Calendar
 1. Locate the generated custom_meal_schedule.ics file.

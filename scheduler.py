@@ -12,6 +12,7 @@ DEFAULT_MEAL_TIMES = {
     "Dinner": time(20, 0),
 }
 OUTPUT_ICS_FILENAME = "custom_meal_schedule.ics"
+OUTPUT_SHOPPING_LIST_FILENAME = "shopping_list.txt"  # New output file
 
 # --- Argument Parser ---
 
@@ -30,7 +31,7 @@ def parse_time_arg(time_str):
 def parse_arguments():
     """Parses command line arguments for input file, date range, and meal times."""
     parser = argparse.ArgumentParser(
-        description="Generates a random meal schedule in iCalendar (.ics) format for a specified date range.",
+        description="Generates a random meal schedule in iCalendar (.ics) format and a unique ingredient shopping list.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
 
@@ -45,6 +46,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
+        "-sd",
         "--start-date",
         type=str,
         default=(datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d"),
@@ -53,6 +55,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
+        "-ed",
         "--end-date",
         type=str,
         default=(datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d"),
@@ -62,6 +65,7 @@ def parse_arguments():
 
     # --- Time Customization Arguments ---
     parser.add_argument(
+        "-bt",
         "--breakfast-time",
         type=parse_time_arg,
         default=DEFAULT_MEAL_TIMES["Breakfast"],
@@ -70,6 +74,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
+        "-lt",
         "--lunch-time",
         type=parse_time_arg,
         default=DEFAULT_MEAL_TIMES["Lunch"],
@@ -78,6 +83,7 @@ def parse_arguments():
     )
 
     parser.add_argument(
+        "-dt",
         "--dinner-time",
         type=parse_time_arg,
         default=DEFAULT_MEAL_TIMES["Dinner"],
@@ -111,7 +117,7 @@ def parse_arguments():
 
 
 def parse_data(filename):
-    """Reads and parses meal data from the specified CSV file."""
+    """Reads and parses meal data from the specified CSV file, including ingredients."""
     meal_items = {"Breakfast": [], "Lunch": [], "Dinner": []}
 
     if not os.path.exists(filename):
@@ -125,18 +131,38 @@ def parse_data(filename):
         reader = csv.DictReader(f, delimiter=";")
 
         for row in reader:
-            if "TITLE" in row and "TOTAL_HOURS" in row and "CATEGORY" in row:
+            # Check for all required headers including the new 'Ingredients'
+            required_headers = ["TITLE", "TOTAL_HOURS", "CATEGORY", "Ingredients"]
+            if all(header in row for header in required_headers):
                 category = row["CATEGORY"].strip()
                 try:
                     duration = float(row["TOTAL_HOURS"])
                     title = row["TITLE"].strip()
+                    # CRITICAL: Split ingredients by comma and strip whitespace
+                    ingredients = [
+                        item.strip()
+                        for item in row["Ingredients"].split(",")
+                        if item.strip()
+                    ]
 
                     if category in meal_items:
                         meal_items[category].append(
-                            {"title": title, "duration_hours": duration}
+                            {
+                                "title": title,
+                                "duration_hours": duration,
+                                "ingredients": ingredients,
+                            }
                         )
                 except ValueError:
                     print(f"Warning: Skipping row due to invalid TOTAL_HOURS: {row}")
+            else:
+                # Only print warning if one of the core fields is missing.
+                if "TITLE" in row:
+                    print(
+                        f"Warning: Skipping row due to missing 'Ingredients' column: {row.get('TITLE', 'Unknown Title')}"
+                    )
+                else:
+                    print(f"Warning: Skipping row due to missing core headers.")
 
     if not any(meal_items.values()):
         raise ValueError(
@@ -147,9 +173,10 @@ def parse_data(filename):
 
 
 def generate_ics_event(start_dt, end_dt, summary):
-    """Generates an iCalendar VEVENT block. NOTE: summary is the food title only."""
+    """Generates an iCalendar VEVENT block. summary is the food title only."""
     dt_format = "%Y%m%dT%H%M%S"
     uid_base = start_dt.strftime("%Y%m%d%H%M%S")
+    # Generate a unique UID
     uid = f"{uid_base}-{random.getrandbits(64)}@meal-scheduler.com"
 
     return f"""BEGIN:VEVENT
@@ -158,11 +185,13 @@ DTSTAMP:{datetime.now().strftime(dt_format)}
 DTSTART:{start_dt.strftime(dt_format)}
 DTEND:{end_dt.strftime(dt_format)}
 SUMMARY:{summary}
-END:VEVENT"""  # SUMMARY now only contains the food item title
+END:VEVENT"""
 
 
-def create_ics_file(meal_data, start_date, end_date, meal_times, filename):
-    """Creates the iCalendar (.ics) file for the specified date range."""
+def create_schedule_and_list(
+    meal_data, start_date, end_date, meal_times, ics_filename, list_filename
+):
+    """Creates the iCalendar file and the shopping list file."""
 
     ics_content = [
         "BEGIN:VCALENDAR",
@@ -170,6 +199,9 @@ def create_ics_file(meal_data, start_date, end_date, meal_times, filename):
         "PRODID:-//MealScheduler//RandomMealGenerator//EN",
         "X-WR-CALNAME:Custom Meal Plan",
     ]
+
+    # Set to store all unique ingredients scheduled for the week
+    unique_ingredients = set()
 
     current_date = start_date
     delta = timedelta(days=1)
@@ -194,28 +226,40 @@ def create_ics_file(meal_data, start_date, end_date, meal_times, filename):
             duration_hours = meal_info["duration_hours"]
             title = meal_info["title"]
 
-            # Combine the current date with the scheduled meal time
+            # Add all unique ingredients to the set
+            if "ingredients" in meal_info and meal_info["ingredients"]:
+                unique_ingredients.update(meal_info["ingredients"])
+
+            # Create ICS event
             start_dt = datetime.combine(current_date, meal_time)
             end_dt = start_dt + timedelta(hours=duration_hours)
-
-            # *** CRITICAL CHANGE: SUMMARY is just the title ***
             summary = title
-
             ics_content.append(generate_ics_event(start_dt, end_dt, summary))
 
-            # Print to console for verification (still show category here for sanity check)
+            # Print to console for verification
             start_str = start_dt.strftime("%H:%M")
             end_str = end_dt.strftime("%H:%M")
             print(f"  - **{category}** ({start_str} - {end_str}): {title}")
 
         current_date += delta  # Move to the next day
 
+    # Finalize ICS file
     ics_content.append("END:VCALENDAR")
-
-    with open(filename, "w") as f:
+    with open(ics_filename, "w") as f:
         f.write("\n".join(ics_content))
 
-    return filename
+    # Create Shopping List file (TXT format)
+    shopping_list_content = "--- Weekly Shopping List ---\n\n"
+    # Sort the ingredients alphabetically
+    sorted_ingredients = sorted(list(unique_ingredients))
+
+    for ingredient in sorted_ingredients:
+        shopping_list_content += f"{ingredient}\n"
+
+    with open(list_filename, "w") as f:
+        f.write(shopping_list_content)
+
+    return ics_filename, list_filename
 
 
 # --- Execution ---
@@ -227,19 +271,25 @@ if __name__ == "__main__":
         # 2. Parse meal data
         parsed_items = parse_data(args.csv_filename)
 
-        # 3. Create the iCalendar file
-        output_filename = create_ics_file(
+        # 3. Create the iCalendar and Shopping List files
+        ics_file, list_file = create_schedule_and_list(
             parsed_items,
             args.start_date,
             args.end_date,
             args.meal_times,
             OUTPUT_ICS_FILENAME,
+            OUTPUT_SHOPPING_LIST_FILENAME,
         )
 
-        print(f"\n✅ Successfully created calendar file: **{output_filename}**")
+        print(f"\n✅ Successfully created calendar file: **{ics_file}**")
+        print(
+            f"✅ Successfully created shopping list file: **{list_file}** (Contains unique ingredients only)"
+        )
 
     except (FileNotFoundError, ValueError, argparse.ArgumentTypeError) as e:
         print(f"\n❌ Script failed: {e}")
-        print("\nRun with `-h` or `--help` for usage details.")
+        print(
+            "\nPlease ensure your CSV includes the 'Ingredients' column and run with `-h` for usage details."
+        )
     except Exception as e:
         print(f"\n❌ An unexpected error occurred: {e}")
