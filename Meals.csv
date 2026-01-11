@@ -1,74 +1,93 @@
-TITLE,TOTAL_HOURS,CATEGORY,Ingredients
-Paneer Tikka Masala,1.5,Lunch,"Paneer, Onions, Tomatoes, Yogurt, Ginger, Garlic, Cream, Turmeric, Chili Powder, Garam Masala, Coriander Powder, Cumin, Salt, Oil, Butter"
-Paneer Tikka Masala,1.5,Dinner,"Paneer, Onions, Tomatoes, Yogurt, Ginger, Garlic, Cream, Turmeric, Chili Powder, Garam Masala, Coriander Powder, Cumin, Salt, Oil, Butter"
-Dal Khichdi,1,Lunch,"Rice, Yellow Moong Dal, Turmeric, Salt, Ghee, Cumin Seeds, Asafoetida, Green Chilies, Ginger, Garlic, Water"
-Dal Khichdi,1,Dinner,"Rice, Yellow Moong Dal, Turmeric, Salt, Ghee, Cumin Seeds, Asafoetida, Green Chilies, Ginger, Garlic, Water"
-Dal Khichdi,1,Breakfast,"Rice, Yellow Moong Dal, Turmeric, Salt, Ghee, Cumin Seeds, Asafoetida, Green Chilies, Ginger, Garlic, Water"
-Dal Rice,1,Lunch,"Rice, Dal, Turmeric, Salt, Cumin Seeds, Oil Or Ghee, Garlic, Water"
-Dal Rice,1,Dinner,"Rice, Dal, Turmeric, Salt, Cumin Seeds, Oil Or Ghee, Garlic, Water"
-Pav Bhaji,1,Lunch,"Potatoes, Cauliflower, Green Peas, Capsicum, Tomatoes, Onions, Butter, Pav Bhaji Masala, Turmeric, Red Chili Powder, Salt, Garlic, Ginger, Lemon, Coriander Leaves, Pav Bread"
-Pav Bhaji,1,Dinner,"Potatoes, Cauliflower, Green Peas, Capsicum, Tomatoes, Onions, Butter, Pav Bhaji Masala, Turmeric, Red Chili Powder, Salt, Garlic, Ginger, Lemon, Coriander Leaves, Pav Bread"
-Pav Bhaji,1,Breakfast,"Potatoes, Cauliflower, Green Peas, Capsicum, Tomatoes, Onions, Butter, Pav Bhaji Masala, Turmeric, Red Chili Powder, Salt, Garlic, Ginger, Lemon, Coriander Leaves, Pav Bread"
-Soya Tikka Masala,1.5,Lunch,"Soya Chunks, Onions, Tomatoes, Yogurt, Ginger, Garlic, Cream, Turmeric, Chili Powder, Garam Masala, Coriander Powder, Cumin, Salt, Oil"
-Soya Tikka Masala,1.5,Dinner,"Soya Chunks, Onions, Tomatoes, Yogurt, Ginger, Garlic, Cream, Turmeric, Chili Powder, Garam Masala, Coriander Powder, Cumin, Salt, Oil"
-Pancakes,0.5,Breakfast,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz"
-Pancakes,0.5,Lunch,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz"
-Pancakes,0.5,Dinner,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz"
-Müsli,0.5,Breakfast,"Müsli, Milk, Sugar, Chocolate Powder"
-Pohe,1,Breakfast,"Pohe, Onions, Green Chilies, Mustard Seeds, Curry Leaves, Turmeric, Peanuts, Salt, Lemon, Oil, Coriander Leaves, Potatoes"
-Pohe,1,Dinner,"Pohe, Onions, Green Chilies, Mustard Seeds, Curry Leaves, Turmeric, Peanuts, Salt, Lemon, Oil, Coriander Leaves, Potatoes"
-Upma,1,Breakfast,"Semolina, Onions, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Vegetables, Salt, Oil, Water"
-Upma,1,Dinner,"Semolina, Onions, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Vegetables, Salt, Oil, Water"
-Quinoa Upma,1,Breakfast,"Quinoa, Onions, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Curry Leaves, Vegetables, Salt, Oil, Water"
-Quinoa Upma,1,Dinner,"Quinoa, Onions, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Curry Leaves, Vegetables, Salt, Oil, Water"
-Peanut Butter Toast,0.5,Breakfast,"Bread, Peanut Butter"
-God Sheera,1,Breakfast,"Semolina, Ghee, Sugar, Milk, Water, Cardamom, Nuts"
-God Sheera,1,Dinner,"Semolina, Ghee, Sugar, Milk, Water, Cardamom, Nuts"
-God Sheera,1,Lunch,"Semolina, Ghee, Sugar, Milk, Water, Cardamom, Nuts"
-Rajma Rice,1,Lunch,"Kidney Beans, Rice, Onions, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Garam Masala, Oil, Salt"
-Rajma Rice,1,Dinner,"Kidney Beans, Rice, Onions, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Garam Masala, Oil, Salt"
-Chole Rice,1,Lunch,"Chickpeas, Rice, Onions, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Chole Masala, Oil, Salt"
-Chole Rice,1,Dinner,"Chickpeas, Rice, Onions, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Chole Masala, Oil, Salt"
-Dal Makhani,1,Lunch,"Whole Urad Dal, Rajma, Cream, Butter, Tomatoes, Ginger, Garlic, Chili Powder, Garam Masala, Salt, Oil"
-Dal Makhani,1,Dinner,"Whole Urad Dal, Rajma, Cream, Butter, Tomatoes, Ginger, Garlic, Chili Powder, Garam Masala, Salt, Oil"
-Grilled Soja Hummus,1,Lunch,"Soya Chunks, Hummus, Olive Oil, Garlic, Lemon, Paprika, Salt, Pepper"
-Grilled Soja Hummus,1,Dinner,"Soya Chunks, Hummus, Olive Oil, Garlic, Lemon, Paprika, Salt, Pepper"
-Pithla Bhakari,1.5,Lunch ,"Gram Flour, Onions, Green Chilies, Turmeric, Mustard Seeds, Cumin Seeds, Garlic, Salt, Oil, Water, Jowar Flour"
-Pithla Bhakari,1.5,Dinner,"Gram Flour, Onions, Green Chilies, Turmeric, Mustard Seeds, Cumin Seeds, Garlic, Salt, Oil, Water, Jowar Flour"
-Palak Paneer,1.5,Lunch ,"Paneer, Spinach, Onions, Tomatoes, Ginger, Garlic, Green Chilies, Cream, Turmeric, Cumin, Garam Masala, Salt, Oil"
-Palak Paneer,1.5,Dinner,"Paneer, Spinach, Onions, Tomatoes, Ginger, Garlic, Green Chilies, Cream, Turmeric, Cumin, Garam Masala, Salt, Oil"
-Besan Chilla,1,Breakfast,"Gram Flour, Onions, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Water, Oil"
-Besan Chilla,1,Lunch,"Gram Flour, Onions, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Water, Oil"
-Besan Chilla,1,Dinner,"Gram Flour, Onions, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Water, Oil"
-Pudina Sandwich,1,Breakfast,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt"
-Pudina Sandwich,1,Lunch,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt"
-Pudina Sandwich,1,Dinner,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt"
-Dosa,1,Breakfast,"Dosa Batter, Sambhar Masala, Green Chutney "
-Dosa,1,Lunch,"Dosa Batter, Sambhar Masala, Green Chutney "
-Dosa,1,Dinner,"Dosa Batter, Sambhar Masala, Green Chutney "
-Idli,1,Breakfast,"Dosa Batter, Sambhar Masala, Green Chutney "
-Idli,1,Lunch,"Dosa Batter, Sambhar Masala, Green Chutney "
-Idli,1,Dinner,"Dosa Batter, Sambhar Masala, Green Chutney "
-Sabudana Khichdi,1,Breakfast,"Sabudana, Potatoes, Peanuts, Green Chilies, Cumin Seeds, Salt, Ghee, Lemon, Coriander Leaves"
-Sabudana Khichdi,1,Lunch,"Sabudana, Potatoes, Peanuts, Green Chilies, Cumin Seeds, Salt, Ghee, Lemon, Coriander Leaves"
-Sabudana Khichdi,1,Dinner,"Sabudana, Potatoes, Peanuts, Green Chilies, Cumin Seeds, Salt, Ghee, Lemon, Coriander Leaves"
-Tacos,1,Breakfast,"Taco Shells, Beans, Tomatoes, Onions, Cheese, Sour Cream, Salsa, Spices, Gaucamole"
-Tacos,1,Lunch,"Taco Shells, Beans, Tomatoes, Onions, Cheese, Sour Cream, Salsa, Spices, Gaucamole"
-Tacos,1,Dinner,"Taco Shells, Beans, Tomatoes, Onions, Cheese, Sour Cream, Salsa, Spices, Gaucamole"
-Jam Sandwich,0.5,Breakfast,"Bread, Fruit Jam"
-Jam Sandwich,0.5,Lunch,"Bread, Fruit Jam"
-Jam Sandwich,0.5,Dinner,"Bread, Fruit Jam"
-Peanut Sandwich,0.5,Breakfast,"Bread, Peanut Butter"
-Peanut Sandwich,0.5,Lunch,"Bread, Peanut Butter"
-Peanut Sandwich,0.5,Dinner,"Bread, Peanut Butter"
-White Sauce Pasta,1,Lunch,"Pasta, Butter, Flour, Milk, Garlic, Pepper, Salt, Cheese, Capsicum, Borocolli, Corn"
-White Sauce Pasta,1,Dinner,"Pasta, Butter, Flour, Milk, Garlic, Pepper, Salt, Cheese, Capsicum, Borocolli, Corn"
-Red Sauce Pasta,1,Lunch,"Pasta, Butter, Flour, Milk, Garlic, Pepper, Salt, Cheese, Capsicum, Borocolli, Corn, Tomatoes"
-Red Sauce Pasta,1,Dinner,"Pasta, Butter, Flour, Milk, Garlic, Pepper, Salt, Cheese, Capsicum, Borocolli, Corn, Tomatoes"
-Hakka Noodles,1,Lunch,"Noodles, Cabbage, Carrots, Capsicum, Onions, Soy Sauce, Vinegar, Chili Sauce, Pepper, Salt, Oil"
-Hakka Noodles,1,Dinner,"Noodles, Cabbage, Carrots, Capsicum, Onions, Soy Sauce, Vinegar, Chili Sauce, Pepper, Salt, Oil"
-Lasagna,2,Lunch,"Lasagna Sheets, Tomatoes, Cheese, White Sauce, Vegetables, Garlic, Onions, Olive Oil, Salt, Pepper"
-Lasagna,2,Dinner,"Lasagna Sheets, Tomatoes, Cheese, White Sauce, Vegetables, Garlic, Onions, Olive Oil, Salt, Pepper"
-Pizza,0.5,Lunch,Frozen Pizza
-Pizza,0.5,Dinner,Frozen Pizza
-Spring Roll,0.5,Breakfast,Frozen Spring Rolls
+TITLE,TOTAL_HOURS,CATEGORY,Ingredients,Protein_g,KCal,Fat_g,Carbs_g,Iron_mg,Fiber_g
+Paneer Kolhapuri,1.5,Lunch,"Cumin, Coriander Seeds, Cloves, Cardamom, Black Pepper, Kashmiri Red Chilli, Coconut Dry, Paneer, bay leaf, Onion, Tomato, Ginger Paste, Garlic Paste, Salt, Turmeric, Kasuri Methi",18,420,28,22,3.2,4.5
+Paneer Kolhapuri,1.5,Dinner,"Cumin, Coriander Seeds, Cloves, Cardamom, Black Pepper, Kashmiri Red Chilli, Coconut Dry, Paneer, bay leaf, Onion, Tomato, Ginger Paste, Garlic Paste, Salt, Turmeric, Kasuri Methi",18,420,28,22,3.2,4.5
+Paneer Tikka Masala,1.5,Lunch,"Cardamoms, Onion, Tomatoes, Sugar, Cashew, Sugar, Salt, Kashmiri Red Chilli, Garam Masala, Coriander Powder, Bay Leaf, Cinnamon, Cloves, Butter, Ginger Paste, Garlic Paste, Coriander, Cream, Kasuri Methi, Paneer",20,480,32,26,3.5,5.0
+Paneer Tikka Masala,1.5,Dinner,"Cardamoms, Onion, Tomatoes, Sugar, Cashew, Sugar, Salt, Kashmiri Red Chilli, Garam Masala, Coriander Powder, Bay Leaf, Cinnamon, Cloves, Butter, Ginger Paste, Garlic Paste, Coriander, Cream, Kasuri Methi, Paneer",20,480,32,26,3.5,5.0
+Dal Khichdi,1,Lunch,"Rice, Yellow Moong Dal, Tur Dal, Red Dal, Turmeric, Salt, Ghee, Cumin Seeds, Asafoetida, Green Chilies, Ginger, Garlic, Schezwan Chutney",14,380,8,62,4.8,8.5
+Dal Khichdi,1,Dinner,"Rice, Yellow Moong Dal, Tur Dal, Red Dal, Turmeric, Salt, Ghee, Cumin Seeds, Asafoetida, Green Chilies, Ginger, Garlic, Schezwan Chutney",14,380,8,62,4.8,8.5
+Dal Khichdi,1,Breakfast,"Rice, Yellow Moong Dal, Tur Dal, Red Dal, Turmeric, Salt, Ghee, Cumin Seeds, Asafoetida, Green Chilies, Ginger, Garlic, Schezwan Chutney",14,380,8,62,4.8,8.5
+Dal Rice,1,Lunch,"Rice, Tur Dal, Turmeric, Salt, Cumin Seeds, Oil Or Ghee, Garlic",12,360,6,65,4.2,7.0
+Dal Rice,1,Dinner,"Rice, Tur Dal, Turmeric, Salt, Cumin Seeds, Oil Or Ghee, Garlic",12,360,6,65,4.2,7.0
+Pav Bhaji,1,Lunch,"Potato, Cauliflower, Green Peas, Carrot, Capsicum, Tomatoes, Onion, Butter, Pav Bhaji Masala, Turmeric, Red Chili Powder, Salt, Garlic, Ginger, Lemon, Coriander Leaves, Pav",10,450,18,62,3.8,9.0
+Pav Bhaji,1,Dinner,"Potato, Cauliflower, Green Peas, Carrot, Capsicum, Tomatoes, Onion, Butter, Pav Bhaji Masala, Turmeric, Red Chili Powder, Salt, Garlic, Ginger, Lemon, Coriander Leaves, Pav",10,450,18,62,3.8,9.0
+Pav Bhaji,1,Breakfast,"Potato, Cauliflower, Green Peas, Carrot, Capsicum, Tomatoes, Onion, Butter, Pav Bhaji Masala, Turmeric, Red Chili Powder, Salt, Garlic, Ginger, Lemon, Coriander Leaves, Pav",10,450,18,62,3.8,9.0
+Soya Tikka Masala,1.5,Lunch,"Cardamoms, Onion, Tomatoes, Sugar, Cashew, Sugar, Salt, Kashmiri Red Chilli, Garam Masala, Coriander Powder, Bay Leaf, Cinnamon, Cloves, Butter, Ginger Paste, Garlic Paste, Coriander, Cream, Kasuri Methi, Soya",25,420,26,24,5.2,6.5
+Soya Tikka Masala,1.5,Dinner,"Cardamoms, Onion, Tomatoes, Sugar, Cashew, Sugar, Salt, Kashmiri Red Chilli, Garam Masala, Coriander Powder, Bay Leaf, Cinnamon, Cloves, Butter, Ginger Paste, Garlic Paste, Coriander, Cream, Kasuri Methi, Soya",25,420,26,24,5.2,6.5
+Pancakes,0.5,Breakfast,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz",8,320,12,48,1.8,2.5
+Pancakes,0.5,Lunch,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz",8,320,12,48,1.8,2.5
+Pancakes,0.5,Dinner,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz",8,320,12,48,1.8,2.5
+Pancakes,0.5,Snack,"Flour 405, Milk, Sugar, Baking Powder, Salt, Butter, Chocolate Chips, Ei Ersatz",8,320,12,48,1.8,2.5
+Müsli,0.5,Breakfast,"Müsli, Milk, Sugar, Chocolate Powder",10,280,6,45,2.5,6.0
+Müsli,0.5,Snack,"Müsli, Milk, Sugar, Chocolate Powder",10,280,6,45,2.5,6.0
+Pohe,1,Breakfast,"Pohe, Onion, Green Chilies, Mustard Seeds, Curry Leaves, Turmeric, Peanuts, Salt, Lemon, Oil, Coriander Leaves, Potato",6,320,14,48,2.8,4.0
+Pohe,1,Dinner,"Pohe, Onion, Green Chilies, Mustard Seeds, Curry Leaves, Turmeric, Peanuts, Salt, Lemon, Oil, Coriander Leaves, Potato",6,320,14,48,2.8,4.0
+Pohe,1,Snack,"Pohe, Onion, Green Chilies, Mustard Seeds, Curry Leaves, Turmeric, Peanuts, Salt, Lemon, Oil, Coriander Leaves, Potato",6,320,14,48,2.8,4.0
+Upma,1,Breakfast,"Semolina, Onion, Red Chillies, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Salt, Oil",8,280,10,42,2.2,3.5
+Upma,1,Dinner,"Semolina, Onion, Red Chillies, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Salt, Oil",8,280,10,42,2.2,3.5
+Upma,1,Snack,"Semolina, Onion, Red Chillies, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Salt, Oil",8,280,10,42,2.2,3.5
+Quinoa Upma,1,Breakfast,"Quinoa, Onion, Red Chillies, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Salt, Oil",10,310,11,44,3.8,5.5
+Quinoa Upma,1,Dinner,"Quinoa, Onion, Red Chillies, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Salt, Oil",10,310,11,44,3.8,5.5
+Quinoa Upma,1,Snack,"Quinoa, Onion, Red Chillies, Green Chilies, Ginger, Mustard Seeds, Urad Dal, Chana Dal, Curry Leaves, Salt, Oil",10,310,11,44,3.8,5.5
+Peanut Butter Toast,0.5,Breakfast,"Bread, Peanut Butter",12,340,18,32,1.5,4.0
+Peanut Butter Toast,0.5,Snack,"Bread, Peanut Butter",12,340,18,32,1.5,4.0
+God Sheera,1,Breakfast,"Semolina, Ghee, Sugar, Milk, Cardamom, Nuts, Cashew",7,380,16,52,1.8,2.0
+God Sheera,1,Dinner,"Semolina, Ghee, Sugar, Milk, Cardamom, Nuts, Cashew",7,380,16,52,1.8,2.0
+God Sheera,1,Lunch,"Semolina, Ghee, Sugar, Milk, Cardamom, Nuts, Cashew",7,380,16,52,1.8,2.0
+God Sheera,1,Snack,"Semolina, Ghee, Sugar, Milk, Cardamom, Nuts, Cashew",7,380,16,52,1.8,2.0
+Rajma Rice,1,Lunch,"Kidney Beans, Rice, Onion, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Garam Masala, Oil, Salt",16,420,8,68,5.5,12.0
+Rajma Rice,1,Dinner,"Kidney Beans, Rice, Onion, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Garam Masala, Oil, Salt",16,420,8,68,5.5,12.0
+Chole Rice,1,Lunch,"Chickpeas, Rice, Onion, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Chole Masala, Oil, Salt",15,410,7,70,4.8,11.5
+Chole Rice,1,Dinner,"Chickpeas, Rice, Onion, Tomatoes, Ginger, Garlic, Cumin, Turmeric, Chili Powder, Chole Masala, Oil, Salt",15,410,7,70,4.8,11.5
+Dal Makhani,1,Lunch,"Whole Urad Dal, Rajma, Cream, Butter, Tomatoes, Ginger, Garlic, Chili Powder, Garam Masala, Salt, Oil",18,460,24,45,6.2,10.0
+Dal Makhani,1,Dinner,"Whole Urad Dal, Rajma, Cream, Butter, Tomatoes, Ginger, Garlic, Chili Powder, Garam Masala, Salt, Oil",18,460,24,45,6.2,10.0
+Grilled Soja Hummus,1,Lunch,"Soya, Hummus, Olive Oil, Garlic, Lemon, Red Paprika Chilli, Salt",22,380,20,28,4.5,8.0
+Grilled Soja Hummus,1,Dinner,"Soya, Hummus, Olive Oil, Garlic, Lemon, Red Paprika Chilli, Salt",22,380,20,28,4.5,8.0
+Grilled Soja Hummus,1,Snack,"Soya, Hummus, Olive Oil, Garlic, Lemon, Red Paprika Chilli, Salt",22,380,20,28,4.5,8.0
+Grilled Soja Hummus,1,Breakfast,"Soya, Hummus, Olive Oil, Garlic, Lemon, Red Paprika Chilli, Salt",22,380,20,28,4.5,8.0
+Pithla Bhakari,1.5,Lunch ,"Gram Flour, Onion, Green Chilies, Turmeric, Mustard Seeds, Cumin Seeds, Garlic, Salt, Oil, Jowar Flour",12,340,10,52,3.5,7.5
+Pithla Bhakari,1.5,Dinner,"Gram Flour, Onion, Green Chilies, Turmeric, Mustard Seeds, Cumin Seeds, Garlic, Salt, Oil, Jowar Flour",12,340,10,52,3.5,7.5
+Palak Paneer,1.5,Lunch ,"Paneer, Spinach, Onion, Tomatoes, Ginger, Garlic, Green Chilies, Cream, Turmeric, Cumin, Garam Masala, Salt, Oil",19,400,26,20,5.8,6.5
+Palak Paneer,1.5,Dinner,"Paneer, Spinach, Onion, Tomatoes, Ginger, Garlic, Green Chilies, Cream, Turmeric, Cumin, Garam Masala, Salt, Oil",19,400,26,20,5.8,6.5
+Besan Chilla,1,Breakfast,"Gram Flour, Onion, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Oil, Tomatoes",10,260,12,28,3.2,5.0
+Besan Chilla,1,Lunch,"Gram Flour, Onion, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Oil, Tomatoes",10,260,12,28,3.2,5.0
+Besan Chilla,1,Dinner,"Gram Flour, Onion, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Oil, Tomatoes",10,260,12,28,3.2,5.0
+Besan Chilla,1,Snack,"Gram Flour, Onion, Green Chilies, Turmeric, Cumin, Salt, Coriander Leaves, Oil, Tomatoes",10,260,12,28,3.2,5.0
+Pudina Sandwich,1,Breakfast,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt",6,280,14,35,1.8,3.0
+Pudina Sandwich,1,Lunch,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt",6,280,14,35,1.8,3.0
+Pudina Sandwich,1,Dinner,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt",6,280,14,35,1.8,3.0
+Pudina Sandwich,1,Snack,"Bread, Coriander, Mint, Lemon, Chat Masala, Butter, Salt",6,280,14,35,1.8,3.0
+Dosa,1,Breakfast,"Dosa Batter, Sambhar Masala, Green Chutney ",8,320,8,58,2.8,5.5
+Dosa,1,Lunch,"Dosa Batter, Sambhar Masala, Green Chutney ",8,320,8,58,2.8,5.5
+Dosa,1,Dinner,"Dosa Batter, Sambhar Masala, Green Chutney ",8,320,8,58,2.8,5.5
+Idli,1,Breakfast,"Dosa Batter, Sambhar Masala, Green Chutney ",7,280,6,52,2.5,4.5
+Idli,1,Lunch,"Dosa Batter, Sambhar Masala, Green Chutney ",7,280,6,52,2.5,4.5
+Idli,1,Dinner,"Dosa Batter, Sambhar Masala, Green Chutney ",7,280,6,52,2.5,4.5
+Sabudana Khichdi,1,Breakfast,"Sabudana, Potato, Peanuts, Green Chilies, Cumin Seeds, Salt, Ghee, Lemon, Coriander Leaves",5,340,16,48,1.5,2.5
+Sabudana Khichdi,1,Lunch,"Sabudana, Potato, Peanuts, Green Chilies, Cumin Seeds, Salt, Ghee, Lemon, Coriander Leaves",5,340,16,48,1.5,2.5
+Sabudana Khichdi,1,Dinner,"Sabudana, Potato, Peanuts, Green Chilies, Cumin Seeds, Salt, Ghee, Lemon, Coriander Leaves",5,340,16,48,1.5,2.5
+Tacos,1,Breakfast,"Taco Shells, Kidney Beans, Tomatoes, Onion, Cheese, Sour Cream, Salsa, Avacado",14,420,22,42,3.8,9.0
+Tacos,1,Lunch,"Taco Shells, Kidney Beans, Tomatoes, Onion, Cheese, Sour Cream, Salsa, Avacado",14,420,22,42,3.8,9.0
+Tacos,1,Dinner,"Taco Shells, Kidney Beans, Tomatoes, Onion, Cheese, Sour Cream, Salsa, Avacado",14,420,22,42,3.8,9.0
+Jam Sandwich,0.5,Breakfast,"Bread, Fruit Jam",4,240,4,46,1.2,2.0
+Jam Sandwich,0.5,Lunch,"Bread, Fruit Jam",4,240,4,46,1.2,2.0
+Jam Sandwich,0.5,Dinner,"Bread, Fruit Jam",4,240,4,46,1.2,2.0
+Jam Sandwich,0.5,Snack,"Bread, Fruit Jam",4,240,4,46,1.2,2.0
+Peanut Sandwich,0.5,Breakfast,"Bread, Peanut Butter",12,340,18,32,1.5,4.0
+Peanut Sandwich,0.5,Lunch,"Bread, Peanut Butter",12,340,18,32,1.5,4.0
+Peanut Sandwich,0.5,Dinner,"Bread, Peanut Butter",12,340,18,32,1.5,4.0
+Peanut Sandwich,0.5,Snack,"Bread, Peanut Butter",12,340,18,32,1.5,4.0
+White Sauce Pasta,1,Lunch,"Pasta, Butter, Flour 405, Milk, Garlic, Black Pepper, Salt, Cheese, Capsicum, Borocolli, Corn",14,480,20,58,2.5,5.0
+White Sauce Pasta,1,Dinner,"Pasta, Butter, Flour 405, Milk, Garlic, Black Pepper, Salt, Cheese, Capsicum, Borocolli, Corn",14,480,20,58,2.5,5.0
+Red Sauce Pasta,1,Lunch,"Pasta, Butter, Flour 405, Milk, Garlic, Black Pepper, Salt, Cheese, Capsicum, Borocolli, Corn, Tomatoes",13,460,18,60,3.2,6.0
+Red Sauce Pasta,1,Dinner,"Pasta, Butter, Flour 405, Milk, Garlic, Black Pepper, Salt, Cheese, Capsicum, Borocolli, Corn, Tomatoes",13,460,18,60,3.2,6.0
+Hakka Noodles,1,Lunch,"Noodles, Cabbage, Carrot, Capsicum, Onion, Soy Sauce, Vinegar, Schezwan Chutney, Black Pepper, Salt, Oil",9,380,12,62,2.8,5.5
+Hakka Noodles,1,Dinner,"Noodles, Cabbage, Carrot, Capsicum, Onion, Soy Sauce, Vinegar, Schezwan Chutney, Black Pepper, Salt, Oil",9,380,12,62,2.8,5.5
+Lasagna,2,Lunch,"Lasagna Sheets, Tomatoes, Cheese, White Sauce, Vegetables, Garlic, Onion, Olive Oil, Salt, Black Pepper",16,520,26,52,3.5,6.5
+Lasagna,2,Dinner,"Lasagna Sheets, Tomatoes, Cheese, White Sauce, Vegetables, Garlic, Onion, Olive Oil, Salt, Black Pepper",16,520,26,52,3.5,6.5
+Pizza,0.5,Lunch,Frozen Pizza,12,380,16,44,2.2,3.0
+Pizza,0.5,Dinner,Frozen Pizza,12,380,16,44,2.2,3.0
+Pizza,0.5,Snack,Frozen Pizza,12,380,16,44,2.2,3.0
+Spring Roll,0.5,Breakfast,Frozen Spring Rolls,6,280,14,32,1.8,3.5
+Spring Roll,0.5,Snack,Frozen Spring Rolls,6,280,14,32,1.8,3.5
+Spring Roll,0.5,Breakfast,Frozen Spring Rolls,6,280,14,32,1.8,3.5
+Spring Roll,0.5,Dinner,Frozen Spring Rolls,6,280,14,32,1.8,3.5
