@@ -88,6 +88,65 @@ Pizza,0.5,Lunch,Frozen Pizza,12,380,16,44,2.2,3.0
 Pizza,0.5,Dinner,Frozen Pizza,12,380,16,44,2.2,3.0
 Pizza,0.5,Snack,Frozen Pizza,12,380,16,44,2.2,3.0
 Spring Roll,0.5,Breakfast,Frozen Spring Rolls,6,280,14,32,1.8,3.5
+Spring Roll,0.5,Breakfast,Frozen Spring Rolls,6,280,14,32,1.8,3.5
 Spring Roll,0.5,Snack,Frozen Spring Rolls,6,280,14,32,1.8,3.5
 Spring Roll,0.5,Breakfast,Frozen Spring Rolls,6,280,14,32,1.8,3.5
 Spring Roll,0.5,Dinner,Frozen Spring Rolls,6,280,14,32,1.8,3.5
+Vegane Maultaschen in Brühe,0.25,Lunch,"Vegane Maultaschen, Vegetable Broth, Onion, Salt, Black Pepper, Coriander Leaves",14,340,10,48,3.2,4.5
+Vegane Maultaschen in Brühe,0.25,Dinner,"Vegane Maultaschen, Vegetable Broth, Onion, Salt, Black Pepper, Coriander Leaves",14,340,10,48,3.2,4.5
+Angebratene Vegane Maultaschen,0.25,Lunch,"Vegane Maultaschen, Onion, Butter, Salt, Black Pepper, Turmeric, Coriander Leaves",14,390,16,48,3.2,4.5
+Angebratene Vegane Maultaschen,0.25,Dinner,"Vegane Maultaschen, Onion, Butter, Salt, Black Pepper, Turmeric, Coriander Leaves",14,390,16,48,3.2,4.5
+Fresh Pesto Gnocchi,0.25,Lunch,"Fresh Gnocchi, Pesto Verde, Cherry Tomatoes, Olive Oil, Salt, Black Pepper, Gouda Cheese",11,420,16,58,2.4,4.0
+Fresh Pesto Gnocchi,0.25,Dinner,"Fresh Gnocchi, Pesto Verde, Cherry Tomatoes, Olive Oil, Salt, Black Pepper, Gouda Cheese",11,420,16,58,2.4,4.0
+Cheese Tortellini in Passata,0.25,Lunch,"Fresh Cheese Tortellini, Tomato Passata, Cream, Garlic, Salt, Black Pepper, Italian Herbs",15,440,18,54,2.8,4.2
+Cheese Tortellini in Passata,0.25,Dinner,"Fresh Cheese Tortellini, Tomato Passata, Cream, Garlic, Salt, Black Pepper, Italian Herbs",15,440,18,54,2.8,4.2
+Falafel Hummus Wrap,0.25,Lunch,"Tortilla Wraps, Falafel, Hummus, Tomatoes, Salad Mix, Lemon, Salt, Olive Oil",15,410,17,52,4.5,8.5
+Falafel Hummus Wrap,0.25,Dinner,"Tortilla Wraps, Falafel, Hummus, Tomatoes, Salad Mix, Lemon, Salt, Olive Oil",15,410,17,52,4.5,8.5
+Falafel Hummus Wrap,0.25,Snack,"Tortilla Wraps, Falafel, Hummus, Tomatoes, Salad Mix, Lemon, Salt, Olive Oil",15,410,17,52,4.5,8.5
+Paneer Bhurji Toast,0.25,Breakfast,"Paneer, Bread, Onion, Tomatoes, Green Chilies, Butter, Turmeric, Cumin Seeds, Salt, Coriander Leaves",19,390,22,30,2.8,3.5
+Paneer Bhurji Toast,0.25,Lunch,"Paneer, Bread, Onion, Tomatoes, Green Chilies, Butter, Turmeric, Cumin Seeds, Salt, Coriander Leaves",19,390,22,30,2.8,3.5
+Paneer Bhurji Toast,0.25,Dinner,"Paneer, Bread, Onion, Tomatoes, Green Chilies, Butter, Turmeric, Cumin Seeds, Salt, Coriander Leaves",19,390,22,30,2.8,3.5
+Paneer Bhurji Toast,0.25,Snack,"Paneer, Bread, Onion, Tomatoes, Green Chilies, Butter, Turmeric, Cumin Seeds, Salt, Coriander Leaves",19,390,22,30,2.8,3.5
+Smoked Tofu Bhurji Toast,0.25,Breakfast,"Smoked Tofu, Bread, Onion, Tomatoes, Green Chilies, Turmeric, Garam Masala, Salt, Oil, Coriander Leaves",22,360,16,32,4.8,5.0
+Smoked Tofu Bhurji Toast,0.25,Lunch,"Smoked Tofu, Bread, Onion, Tomatoes, Green Chilies, Turmeric, Garam Masala, Salt, Oil, Coriander Leaves",22,360,16,32,4.8,5.0
+Smoked Tofu Bhurji Toast,0.25,Dinner,"Smoked Tofu, Bread, Onion, Tomatoes, Green Chilies, Turmeric, Garam Masala, Salt, Oil, Coriander Leaves",22,360,16,32,4.8,5.0
+Smoked Tofu Bhurji Toast,0.25,Snack,"Smoked Tofu, Bread, Onion, Tomatoes, Green Chilies, Turmeric, Garam Masala, Salt, Oil, Coriander Leaves",22,360,16,32,4.8,5.0
+Canned Chickpea Chaat,0.25,Breakfast,"Canned Chickpeas, Onion, Tomatoes, Cucumber, Lemon, Chat Masala, Cumin Seeds, Salt, Coriander Leaves",14,290,5,46,4.2,10.0
+Canned Chickpea Chaat,0.25,Lunch,"Canned Chickpeas, Onion, Tomatoes, Cucumber, Lemon, Chat Masala, Cumin Seeds, Salt, Coriander Leaves",14,290,5,46,4.2,10.0
+Canned Chickpea Chaat,0.25,Dinner,"Canned Chickpeas, Onion, Tomatoes, Cucumber, Lemon, Chat Masala, Cumin Seeds, Salt, Coriander Leaves",14,290,5,46,4.2,10.0
+Canned Chickpea Chaat,0.25,Snack,"Canned Chickpeas, Onion, Tomatoes, Cucumber, Lemon, Chat Masala, Cumin Seeds, Salt, Coriander Leaves",14,290,5,46,4.2,10.0
+Smoked Tofu Wok Stir Fry,0.25,Lunch,"Smoked Tofu, Frozen Wok Vegetables, Soy Sauce, Schezwan Chutney, Garlic, Salt, Oil",21,330,14,28,5.1,7.2
+Smoked Tofu Wok Stir Fry,0.25,Dinner,"Smoked Tofu, Frozen Wok Vegetables, Soy Sauce, Schezwan Chutney, Garlic, Salt, Oil",21,330,14,28,5.1,7.2
+High Protein Quark Berry Bowl,0.25,Breakfast,"Magerquark, Rolled Oats, Frozen Berries, Milk, Honey, Nuts, Chia Seeds",32,360,6,45,2.6,6.5
+High Protein Quark Berry Bowl,0.25,Snack,"Magerquark, Rolled Oats, Frozen Berries, Milk, Honey, Nuts, Chia Seeds",32,360,6,45,2.6,6.5
+Overnight Peanut Butter Oats,0.25,Breakfast,"Rolled Oats, Milk, Peanut Butter, Banana, Chia Seeds, Honey",16,410,15,56,3.1,7.0
+Overnight Peanut Butter Oats,0.25,Snack,"Rolled Oats, Milk, Peanut Butter, Banana, Chia Seeds, Honey",16,410,15,56,3.1,7.0
+Baked Beans on Cheese Toast,0.25,Breakfast,"Canned Baked Beans, Bread, Butter, Gouda Cheese, Black Pepper, Salt",16,370,12,50,3.8,8.0
+Baked Beans on Cheese Toast,0.25,Lunch,"Canned Baked Beans, Bread, Butter, Gouda Cheese, Black Pepper, Salt",16,370,12,50,3.8,8.0
+Baked Beans on Cheese Toast,0.25,Dinner,"Canned Baked Beans, Bread, Butter, Gouda Cheese, Black Pepper, Salt",16,370,12,50,3.8,8.0
+Baked Beans on Cheese Toast,0.25,Snack,"Canned Baked Beans, Bread, Butter, Gouda Cheese, Black Pepper, Salt",16,370,12,50,3.8,8.0
+Masala Maggi with Peas and Paneer,0.25,Lunch,"Instant Noodles, Paneer, Green Peas, Butter, Garam Masala, Salt, Turmeric",15,420,20,46,2.5,3.8
+Masala Maggi with Peas and Paneer,0.25,Dinner,"Instant Noodles, Paneer, Green Peas, Butter, Garam Masala, Salt, Turmeric",15,420,20,46,2.5,3.8
+Masala Maggi with Peas and Paneer,0.25,Snack,"Instant Noodles, Paneer, Green Peas, Butter, Garam Masala, Salt, Turmeric",15,420,20,46,2.5,3.8
+Couscous and Bean Salad Bowl,0.25,Lunch,"Instant Couscous, Kidney Beans, Canned Corn, Feta Cheese, Cherry Tomatoes, Cucumber, Olive Oil, Lemon, Salt",17,430,14,60,4.6,9.5
+Couscous and Bean Salad Bowl,0.25,Dinner,"Instant Couscous, Kidney Beans, Canned Corn, Feta Cheese, Cherry Tomatoes, Cucumber, Olive Oil, Lemon, Salt",17,430,14,60,4.6,9.5
+Curd Rice with Tadka,0.25,Lunch,"Rice, Yogurt, Mustard Seeds, Curry Leaves, Green Chilies, Ginger, Ghee, Salt",11,340,10,52,1.8,2.0
+Curd Rice with Tadka,0.25,Dinner,"Rice, Yogurt, Mustard Seeds, Curry Leaves, Green Chilies, Ginger, Ghee, Salt",11,340,10,52,1.8,2.0
+German Brotzeit Platter,0.25,Breakfast,"Whole Grain Bread, Frischkäse, Gouda Cheese, Cucumber, Tomatoes, Salt, Black Pepper",18,360,16,36,2.5,6.0
+German Brotzeit Platter,0.25,Lunch,"Whole Grain Bread, Frischkäse, Gouda Cheese, Cucumber, Tomatoes, Salt, Black Pepper",18,360,16,36,2.5,6.0
+German Brotzeit Platter,0.25,Dinner,"Whole Grain Bread, Frischkäse, Gouda Cheese, Cucumber, Tomatoes, Salt, Black Pepper",18,360,16,36,2.5,6.0
+German Brotzeit Platter,0.25,Snack,"Whole Grain Bread, Frischkäse, Gouda Cheese, Cucumber, Tomatoes, Salt, Black Pepper",18,360,16,36,2.5,6.0
+Cheesy Bean Quesadilla,0.25,Lunch,"Tortilla Wraps, Gouda Cheese, Kidney Beans, Canned Corn, Salsa, Butter, Salt",16,390,17,44,3.2,6.5
+Cheesy Bean Quesadilla,0.25,Dinner,"Tortilla Wraps, Gouda Cheese, Kidney Beans, Canned Corn, Salsa, Butter, Salt",16,390,17,44,3.2,6.5
+Cheesy Bean Quesadilla,0.25,Snack,"Tortilla Wraps, Gouda Cheese, Kidney Beans, Canned Corn, Salsa, Butter, Salt",16,390,17,44,3.2,6.5
+Avocado Mozzarella Toast,0.25,Breakfast,"Whole Grain Bread, Avocado, Tomatoes, Mozzarella, Olive Oil, Salt, Black Pepper, Chili Flakes",14,370,22,30,2.2,6.5
+Avocado Mozzarella Toast,0.25,Lunch,"Whole Grain Bread, Avocado, Tomatoes, Mozzarella, Olive Oil, Salt, Black Pepper, Chili Flakes",14,370,22,30,2.2,6.5
+Avocado Mozzarella Toast,0.25,Snack,"Whole Grain Bread, Avocado, Tomatoes, Mozzarella, Olive Oil, Salt, Black Pepper, Chili Flakes",14,370,22,30,2.2,6.5
+Soy Milk Oats Shake,0.25,Breakfast,"Soy Milk, Rolled Oats, Peanut Butter, Banana, Honey, Chia Seeds",20,390,15,48,3.5,5.5
+Soy Milk Oats Shake,0.25,Snack,"Soy Milk, Rolled Oats, Peanut Butter, Banana, Honey, Chia Seeds",20,390,15,48,3.5,5.5
+Canned Lentil Soup with Broetchen,0.25,Lunch,"Canned Lentil Soup, Bread, Butter, Salt, Black Pepper",18,380,9,56,5.5,11.0
+Canned Lentil Soup with Broetchen,0.25,Dinner,"Canned Lentil Soup, Bread, Butter, Salt, Black Pepper",18,380,9,56,5.5,11.0
+Korniger Frischkaese Bowl,0.25,Breakfast,"Körniger Frischkäse, Cherry Tomatoes, Cucumber, Olive Oil, Salt, Black Pepper, Whole Grain Bread",27,310,10,26,1.8,3.0
+Korniger Frischkaese Bowl,0.25,Lunch,"Körniger Frischkäse, Cherry Tomatoes, Cucumber, Olive Oil, Salt, Black Pepper, Whole Grain Bread",27,310,10,26,1.8,3.0
+Korniger Frischkaese Bowl,0.25,Dinner,"Körniger Frischkäse, Cherry Tomatoes, Cucumber, Olive Oil, Salt, Black Pepper, Whole Grain Bread",27,310,10,26,1.8,3.0
+Korniger Frischkaese Bowl,0.25,Snack,"Körniger Frischkäse, Cherry Tomatoes, Cucumber, Olive Oil, Salt, Black Pepper, Whole Grain Bread",27,310,10,26,1.8,3.0

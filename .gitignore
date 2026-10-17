@@ -1,2 +1,8 @@
 *.ics
 *.txt
+discounts.json
+planner_data.js
+*.pem
+*.key
+*.pfx
+__pycache__/

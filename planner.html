@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProTeen Planner</title>
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --surface-2: #f0eee8;
+    --border: #e2dfd6;
+    --text: #1f2421;
+    --muted: #6b716c;
+    --accent: #2f7a4f;
+    --accent-soft: #e3f1e8;
+    --on-accent: #ffffff;
+    --sale: #c2410c;
+    --sale-soft: #fdeee4;
+    --warn: #b7791f;
+    --over: #c53030;
+    --bar-bg: #e8e5dd;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 2px 8px rgba(0,0,0,.04);
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151816;
+      --surface: #1d211f;
+      --surface-2: #252a27;
+      --border: #333a36;
+      --text: #e7ebe8;
+      --muted: #98a09b;
+      --accent: #5cc08a;
+      --accent-soft: #1f3a2b;
+      --on-accent: #0f1f16;
+      --sale: #fb923c;
+      --sale-soft: #3a2518;
+      --warn: #e0a84a;
+      --over: #f17070;
+      --bar-bg: #2d3330;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151816; --surface: #1d211f; --surface-2: #252a27; --border: #333a36;
+    --text: #e7ebe8; --muted: #98a09b; --accent: #5cc08a; --accent-soft: #1f3a2b; --on-accent: #0f1f16;
+    --sale: #fb923c; --sale-soft: #3a2518; --warn: #e0a84a; --over: #f17070;
+    --bar-bg: #2d3330; --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  button, input, select { font: inherit; color: inherit; }
+  button {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  button:hover { background: var(--surface-2); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  button.primary:hover { filter: brightness(1.08); }
+  button.icon { padding: 2px 7px; border: none; background: transparent; color: var(--muted); }
+  button.icon:hover { color: var(--text); background: var(--surface-2); }
+  input[type=text], input[type=number], input[type=search], select {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  }
+  header h1 { font-size: 18px; margin: 0 12px 0 0; }
+  .week-nav { display: flex; align-items: center; gap: 6px; }
+  .week-nav strong { min-width: 170px; text-align: center; }
+  .spacer { flex: 1; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  label.check { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); }
+
+  .banner {
+    margin: 12px 16px 0;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    background: var(--sale-soft);
+    color: var(--text);
+    font-size: 13px;
+  }
+  .banner.none { background: var(--surface-2); color: var(--muted); }
+  .banner code { background: var(--surface); padding: 1px 5px; border-radius: 4px; }
+
+  main {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 16px;
+    padding: 16px;
+    align-items: start;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .card > h2 {
+    font-size: 14px; margin: 0; padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .card .body { padding: 12px 14px; }
+
+  /* Library */
+  .library { position: sticky; top: 76px; max-height: calc(100vh - 92px); display: flex; flex-direction: column; }
+  .lib-filters { display: grid; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .lib-filters .row { display: flex; gap: 6px; }
+  .lib-filters .row > * { flex: 1; min-width: 0; }
+  .lib-hint { font-size: 12px; color: var(--muted); }
+  .lib-hint b { color: var(--accent); }
+  .lib-list { overflow-y: auto; padding: 8px; display: grid; gap: 6px; }
+  .meal {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    background: var(--surface);
+  }
+  .meal:hover { border-color: var(--accent); }
+  .meal .name { font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
+  .meal .macros { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .meal .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .tag {
+    font-size: 11px; padding: 1px 7px; border-radius: 999px;
+    background: var(--surface-2); color: var(--muted); white-space: nowrap;
+  }
+  .tag.sale { background: var(--sale-soft); color: var(--sale); font-weight: 600; }
+  .empty { color: var(--muted); padding: 16px; text-align: center; }
+
+  /* Week grid */
+  .week {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .day h3 {
+    margin: 0; padding: 10px 12px; font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .day h3 span { color: var(--muted); font-weight: 400; }
+  .day.today { border-color: var(--accent); }
+  .slots { padding: 8px; display: grid; gap: 6px; }
+  .slot {
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 6px 8px;
+    min-height: 52px;
+    cursor: pointer;
+    transition: border-color .1s, background .1s;
+  }
+  .slot:hover { border-color: var(--muted); }
+  .slot.filled { border-style: solid; background: var(--surface-2); }
+  .slot.selected { border: 2px solid var(--accent); padding: 5px 7px; background: var(--accent-soft); }
+  .slot.dragover { border-color: var(--accent); background: var(--accent-soft); }
+  .slot .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .slot .label .actions { display: none; }
+  .slot.filled:hover .label .actions, .slot.selected .label .actions { display: flex; }
+  .slot .title { font-weight: 600; margin-top: 1px; }
+  .slot .sub { font-size: 12px; color: var(--muted); }
+  .slot .placeholder { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+  .bars { padding: 4px 12px 12px; display: grid; gap: 5px; }
+  .bar { display: grid; grid-template-columns: 52px 1fr 70px; gap: 6px; align-items: center; font-size: 11px; }
+  .bar .track { height: 6px; border-radius: 3px; background: var(--bar-bg); overflow: hidden; }
+  .bar .fill { height: 100%; border-radius: 3px; background: var(--warn); }
+  .bar .fill.ok { background: var(--accent); }
+  .bar .fill.over { background: var(--over); }
+  .bar .val { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* Bottom panels */
+  .bottom { grid-column: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .stat { background: var(--surface-2); border-radius: 8px; padding: 10px; }
+  .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .stat .v { font-size: 20px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .stat .g { font-size: 11px; color: var(--muted); }
+
+  .shop h4 { margin: 10px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .shop h4:first-child { margin-top: 0; }
+  .shop ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .shop li { display: flex; gap: 8px; align-items: flex-start; padding: 3px 0; }
+  .shop li.done .item { text-decoration: line-through; color: var(--muted); }
+  .shop .item { flex: 1; }
+  .shop .offer { font-size: 12px; color: var(--sale); }
+  .shop .count { font-size: 12px; color: var(--muted); }
+  .shop-scroll { max-height: 420px; overflow-y: auto; }
+
+  details.goals { padding: 0 14px 12px; }
+  details.goals summary { cursor: pointer; color: var(--muted); padding: 4px 0; }
+  .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 6px; }
+  .goal-grid label { font-size: 11px; color: var(--muted); display: grid; gap: 2px; }
+  .goal-grid input { width: 100%; padding: 4px 6px; }
+
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--text); color: var(--bg);
+    padding: 8px 16px; border-radius: 8px; font-size: 13px;
+    opacity: 0; transition: opacity .2s; pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+
+  dialog {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0;
+    width: min(640px, calc(100vw - 32px));
+    max-height: calc(100vh - 64px);
+  }
+  dialog::backdrop { background: rgba(0,0,0,.35); }
+  dialog h2 {
+    font-size: 14px; margin: 0; padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  dialog .files { padding: 10px 14px 0; font-size: 12px; color: var(--muted); }
+  dialog pre {
+    margin: 0; padding: 12px 14px;
+    font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    overflow: auto; max-height: 60vh;
+  }
+
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    .library { position: static; max-height: 60vh; }
+    .bottom { grid-column: 1; grid-template-columns: 1fr; }
+    .week-nav strong { min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🍽️ ProTeen</h1>
+  <div class="week-nav">
+    <button id="prevWeek" title="Previous week">‹</button>
+    <strong id="weekLabel"></strong>
+    <button id="nextWeek" title="Next week">›</button>
+    <button id="thisWeek">Today</button>
+  </div>
+  <div class="spacer"></div>
+  <div class="toolbar">
+    <label class="check"><input type="checkbox" id="preferSale" checked> Prefer offers</label>
+    <button id="autoFill">Auto-fill empty</button>
+    <button id="reshuffle">Re-plan week</button>
+    <button id="clearWeek">Clear</button>
+    <button id="exportIcs">Export .ics</button>
+    <button id="showReport">Nutrition report</button>
+    <button class="primary" id="savePlan" title="Write meal_plan.ics, shopping_list.txt and nutrition_report.txt into the ProTeen folder">Save to ProTeen</button>
+  </div>
+</header>
+
+<div id="banner" class="banner"></div>
+
+<main>
+  <aside class="card library">
+    <h2>Meals <span class="tag" id="mealCount"></span></h2>
+    <div class="lib-filters">
+      <input type="search" id="search" placeholder="Search meals or ingredients…">
+      <div class="row">
+        <select id="catFilter">
+          <option value="">All categories</option>
+          <option>Breakfast</option>
+          <option>Lunch</option>
+          <option>Snack</option>
+          <option>Dinner</option>
+        </select>
+        <select id="sortBy">
+          <option value="sale">Most on offer</option>
+          <option value="protein">Most protein</option>
+          <option value="kcal">Fewest kcal</option>
+          <option value="iron">Most iron</option>
+          <option value="name">A–Z</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" id="saleOnly"> Only meals with offers</label>
+      <div class="lib-hint" id="libHint"></div>
+    </div>
+    <details class="goals">
+      <summary>Daily goals</summary>
+      <div class="goal-grid" id="goalInputs"></div>
+    </details>
+    <div class="lib-list" id="library"></div>
+  </aside>
+
+  <section class="week" id="week"></section>
+
+  <div class="bottom">
+    <section class="card">
+      <h2>This week</h2>
+      <div class="body"><div class="stats" id="stats"></div></div>
+    </section>
+    <section class="card shop">
+      <h2>Shopping list
+        <span class="toolbar">
+          <button id="copyList">Copy</button>
+          <button id="downloadList" title="shopping_list.txt (same format as scheduler.py)">Download</button>
+        </span>
+      </h2>
+      <div class="body shop-scroll" id="shopping"></div>
+    </section>
+  </div>
+</main>
+
+<dialog id="reportDialog">
+  <h2>Nutrition report <button class="icon" id="closeReport" title="Close">×</button></h2>
+  <div class="files" id="reportFiles"></div>
+  <pre id="reportText"></pre>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script src="planner_data.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // ----------------------------------------------------------------
+  // Data
+  // ----------------------------------------------------------------
+
+  const DATA = window.PROTEEN_DATA;
+  if (!DATA) {
+    document.body.innerHTML =
+      '<p style="padding:24px">No data found. Run <code>python3 planner.py</code> first to generate <code>planner_data.js</code>.</p>';
+    return;
+  }
+
+  const SLOTS = ["Breakfast", "Lunch", "Snack", "Dinner"];
+  const SLOT_TIMES = DATA.slotTimes || { Breakfast: "06:00", Lunch: "11:00", Snack: "17:00", Dinner: "20:00" };
+  const NUTRIENTS = [
+    { key: "protein_g", label: "Protein", unit: "g", def: 80 },
+    { key: "kcal", label: "Kcal", unit: "", def: 2000, cap: true },
+    { key: "fat_g", label: "Fat", unit: "g", def: 60, cap: true },
+    { key: "carbs_g", label: "Carbs", unit: "g", def: 250, cap: true },
+    { key: "iron_mg", label: "Iron", unit: "mg", def: 18 },
+    { key: "fiber_g", label: "Fiber", unit: "g", def: 25 },
+  ];
+  const BAR_NUTRIENTS = ["protein_g", "kcal", "iron_mg", "fiber_g"];
+  const STORAGE_KEY = "proteen-planner-v1";
+
+  const meals = DATA.meals;
+  const mealByTitle = new Map(meals.map(m => [m.title, m]));
+  const discounts = DATA.discounts;
+  const offers = discounts ? discounts.offers : [];
+
+  // Group ingredient spellings ("Tomato"/"Tomatoes", "Avacado"/"Avocado") under one key
+  const ALIASES = { avacado: "avocado", borocolli: "broccoli" };
+  function ingKey(name) {
+    let k = name.trim().toLowerCase();
+    k = ALIASES[k] || k;
+    if (k.endsWith("oes")) k = k.slice(0, -2);
+    else if (k.endsWith("s") && !k.endsWith("ss") && k.length > 4) k = k.slice(0, -1);
+    return k;
+  }
+
+  // ingredient key -> sorted offers (cheapest first)
+  const offersByKey = new Map();
+  if (discounts && discounts.byIngredient) {
+    for (const [name, indices] of Object.entries(discounts.byIngredient)) {
+      const key = ingKey(name);
+      const list = offersByKey.get(key) || [];
+      for (const i of indices) if (!list.includes(offers[i])) list.push(offers[i]);
+      list.sort((a, b) => (a.price ?? 1e9) - (b.price ?? 1e9));
+      offersByKey.set(key, list);
+    }
+  }
+
+  for (const meal of meals) {
+    meal.saleIngredients = meal.ingredients.filter(i => offersByKey.has(ingKey(i)));
+    meal.search = (meal.title + " " + meal.ingredients.join(" ")).toLowerCase();
+  }
+
+  // ----------------------------------------------------------------
+  // State (localStorage is a convenience only; the page works without it)
+  // ----------------------------------------------------------------
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* storage unavailable */ }
+    return {};
+  }
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+  }
+
+  const state = Object.assign({ plan: {}, goals: {}, checked: {} }, loadState());
+  for (const n of NUTRIENTS) if (!(n.key in state.goals)) state.goals[n.key] = n.def;
+
+  let weekStart = mondayOf(new Date());
+  let selected = null; // {date, slot}
+
+  // ----------------------------------------------------------------
+  // Date helpers
+  // ----------------------------------------------------------------
+
+  function mondayOf(d) {
+    const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    const day = (x.getDay() + 6) % 7;
+    x.setDate(x.getDate() - day);
+    return x;
+  }
+  function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+  function iso(d) {
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function weekDates() { return Array.from({ length: 7 }, (_, i) => addDays(weekStart, i)); }
+  const fmtDay = new Intl.DateTimeFormat(undefined, { weekday: "short" });
+  const fmtDate = new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short" });
+
+  function slotId(date, slot) { return iso(date) + "|" + slot; }
+  function getMeal(date, slot) {
+    const t = state.plan[slotId(date, slot)];
+    return t ? mealByTitle.get(t) : null;
+  }
+  function setMeal(date, slot, meal) {
+    const id = slotId(date, slot);
+    if (meal) state.plan[id] = meal.title; else delete state.plan[id];
+  }
+
+  // ----------------------------------------------------------------
+  // Nutrition + scoring (mirrors select_meal_for_nutrition in scheduler.py)
+  // ----------------------------------------------------------------
+
+  function dayTotals(date, skipSlot) {
+    const totals = Object.fromEntries(NUTRIENTS.map(n => [n.key, 0]));
+    for (const slot of SLOTS) {
+      if (slot === skipSlot) continue;
+      const m = getMeal(date, slot);
+      if (m) for (const n of NUTRIENTS) totals[n.key] += m.nutrition[n.key] || 0;
+    }
+    return totals;
+  }
+
+  function nutritionScore(meal, current) {
+    let score = 0;
+    for (const n of NUTRIENTS) {
+      const goal = state.goals[n.key];
+      if (!(goal > 0)) continue;
+      const gap = Math.max(0, goal - current[n.key]);
+      if (gap > 0) {
+        const fill = Math.min((meal.nutrition[n.key] || 0) / gap, 1);
+        const weight = (n.key === "protein_g" || n.key === "iron_mg") ? 2 : 1;
+        score += fill * weight * (gap / goal);
+      } else if (n.cap) {
+        score -= ((meal.nutrition[n.key] || 0) / goal) * 0.5;
+      }
+    }
+    return score;
+  }
+
+  function weekUsage() {
+    const counts = new Map();
+    for (const d of weekDates()) for (const s of SLOTS) {
+      const m = getMeal(d, s);
+      if (m) counts.set(m.title, (counts.get(m.title) || 0) + 1);
+    }
+    return counts;
+  }
+
+  function pickMeal(date, slot, jitter) {
+    const candidates = meals.filter(m => m.categories.includes(slot));
+    if (!candidates.length) return null;
+    const current = dayTotals(date, slot);
+    const usage = weekUsage();
+    const todays = new Set(SLOTS.filter(s => s !== slot).map(s => getMeal(date, s)).filter(Boolean).map(m => m.title));
+    const preferSale = document.getElementById("preferSale").checked;
+
+    let best = null, bestScore = -Infinity;
+    for (const m of candidates) {
+      let score = nutritionScore(m, current);
+      if (preferSale) score += Math.min(m.saleIngredients.length, 4) * 0.35;
+      score -= (usage.get(m.title) || 0) * 0.8;
+      if (todays.has(m.title)) score -= 5;
+      score += Math.random() * jitter;
+      if (score > bestScore) { bestScore = score; best = m; }
+    }
+    return best;
+  }
+
+  function autoFill(overwrite) {
+    for (const d of weekDates()) {
+      if (overwrite) for (const s of SLOTS) setMeal(d, s, null);
+      for (const s of SLOTS) if (!getMeal(d, s)) setMeal(d, s, pickMeal(d, s, 0.6));
+    }
+    saveState();
+    render();
+  }
+
+  // ----------------------------------------------------------------
+  // Rendering
+  // ----------------------------------------------------------------
+
+  function el(tag, attrs, ...children) {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (k === "class") node.className = v;
+      else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+      else if (v !== false && v != null) node.setAttribute(k, v === true ? "" : v);
+    }
+    for (const c of children.flat()) {
+      if (c == null || c === false) continue;
+      node.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    }
+    return node;
+  }
+
+  function euro(v) { return v == null ? "" : v.toFixed(2).replace(".", ",") + " €"; }
+  function round(v) { return Math.round(v); }
+
+  function renderBanner() {
+    const b = document.getElementById("banner");
+    b.innerHTML = "";
+    if (!discounts || !offers.length) {
+      b.className = "banner none";
+      b.append("No offers loaded. Run ", el("code", {}, "python3 discounts.py --market <ID>"),
+        " (or ", el("code", {}, "--manual offers.csv"), "), then ", el("code", {}, "python3 planner.py"), ".");
+      return;
+    }
+    b.className = "banner";
+    const stores = [...new Set(offers.map(o => o.store))].join(", ");
+    const until = discounts.validUntil ? " · valid until " + discounts.validUntil : "";
+    const matched = offersByKey.size;
+    b.append(el("b", {}, offers.length + " offers"), " from " + stores + until +
+      " · " + matched + " of your ingredients are on offer");
+  }
+
+  function renderWeekLabel() {
+    const end = addDays(weekStart, 6);
+    document.getElementById("weekLabel").textContent = fmtDate.format(weekStart) + " – " + fmtDate.format(end);
+  }
+
+  function renderBars(totals) {
+    return el("div", { class: "bars" }, BAR_NUTRIENTS.map(key => {
+      const n = NUTRIENTS.find(x => x.key === key);
+      const goal = state.goals[key] || 1;
+      const pct = totals[key] / goal;
+      const cls = pct > 1.15 && n.cap ? "over" : pct >= 0.85 ? "ok" : "";
+      return el("div", { class: "bar", title: n.label + ": " + round(totals[key]) + " / " + goal + n.unit },
+        el("span", {}, n.label),
+        el("div", { class: "track" }, el("div", { class: "fill " + cls, style: "width:" + Math.min(pct * 100, 100) + "%" })),
+        el("span", { class: "val" }, round(totals[key]) + "/" + goal + n.unit));
+    }));
+  }
+
+  function renderSlot(date, slot) {
+    const meal = getMeal(date, slot);
+    const isSel = selected && selected.date === iso(date) && selected.slot === slot;
+    const cls = "slot" + (meal ? " filled" : "") + (isSel ? " selected" : "");
+
+    const actions = el("span", { class: "actions" },
+      el("button", {
+        class: "icon", title: "Suggest another meal", onclick: e => {
+          e.stopPropagation();
+          const prev = meal && meal.title;
+          let next = pickMeal(date, slot, 2.5);
+          for (let i = 0; i < 5 && next && next.title === prev; i++) next = pickMeal(date, slot, 4);
+          setMeal(date, slot, next); saveState(); render();
+        }
+      }, "↻"),
+      meal && el("button", {
+        class: "icon", title: "Remove", onclick: e => {
+          e.stopPropagation(); setMeal(date, slot, null); saveState(); render();
+        }
+      }, "×"));
+
+    const node = el("div", {
+      class: cls,
+      onclick: () => {
+        selected = isSel ? null : { date: iso(date), slot };
+        if (selected) document.getElementById("catFilter").value = slot;
+        render();
+      },
+      ondragover: e => { e.preventDefault(); node.classList.add("dragover"); },
+      ondragleave: () => node.classList.remove("dragover"),
+      ondrop: e => {
+        e.preventDefault();
+        const m = mealByTitle.get(e.dataTransfer.getData("text/plain"));
+        if (m) { setMeal(date, slot, m); saveState(); render(); }
+      },
+    },
+      el("div", { class: "label" }, slot, actions),
+      meal
+        ? [el("div", { class: "title" }, meal.title),
+           el("div", { class: "sub" }, round(meal.nutrition.protein_g) + "g protein · " + round(meal.nutrition.kcal) + " kcal",
+             meal.saleIngredients.length ? el("span", { class: "tag sale", style: "margin-left:6px" }, "🏷 " + meal.saleIngredients.length) : null)]
+        : el("div", { class: "placeholder" }, isSel ? "Pick a meal from the list →" : "Click to choose"));
+    return node;
+  }
+
+  function renderWeek() {
+    const wrap = document.getElementById("week");
+    wrap.innerHTML = "";
+    const todayIso = iso(new Date());
+    for (const d of weekDates()) {
+      wrap.append(el("article", { class: "card day" + (iso(d) === todayIso ? " today" : "") },
+        el("h3", {}, fmtDay.format(d), el("span", {}, fmtDate.format(d))),
+        el("div", { class: "slots" }, SLOTS.map(s => renderSlot(d, s))),
+        renderBars(dayTotals(d))));
+    }
+  }
+
+  function renderLibrary() {
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    const cat = document.getElementById("catFilter").value;
+    const saleOnly = document.getElementById("saleOnly").checked;
+    const sort = document.getElementById("sortBy").value;
+
+    let list = meals.filter(m =>
+      (!cat || m.categories.includes(cat)) &&
+      (!q || m.search.includes(q)) &&
+      (!saleOnly || m.saleIngredients.length));
+
+    const sorters = {
+      sale: (a, b) => b.saleIngredients.length - a.saleIngredients.length || b.nutrition.protein_g - a.nutrition.protein_g,
+      protein: (a, b) => b.nutrition.protein_g - a.nutrition.protein_g,
+      kcal: (a, b) => a.nutrition.kcal - b.nutrition.kcal,
+      iron: (a, b) => b.nutrition.iron_mg - a.nutrition.iron_mg,
+      name: (a, b) => a.title.localeCompare(b.title),
+    };
+    list.sort(sorters[sort]);
+
+    document.getElementById("mealCount").textContent = list.length + " / " + meals.length;
+    const hint = document.getElementById("libHint");
+    hint.innerHTML = "";
+    if (selected) {
+      const d = new Date(selected.date + "T00:00");
+      hint.append("Filling ", el("b", {}, fmtDay.format(d) + " " + selected.slot), ". Click a meal, or drag it onto any slot.");
+    } else {
+      hint.append("Click a slot, then a meal — or drag meals onto the week.");
+    }
+
+    const wrap = document.getElementById("library");
+    wrap.innerHTML = "";
+    if (!list.length) { wrap.append(el("div", { class: "empty" }, "No meals match.")); return; }
+
+    for (const m of list) {
+      const saleTitles = m.saleIngredients.map(i => {
+        const o = offersByKey.get(ingKey(i))[0];
+        return i + ": " + o.title + " (" + o.store + " " + euro(o.price) + ")";
+      }).join("\n");
+      wrap.append(el("div", {
+        class: "meal", draggable: "true",
+        title: m.ingredients.join(", ") + (saleTitles ? "\n\nOn offer:\n" + saleTitles : ""),
+        ondragstart: e => e.dataTransfer.setData("text/plain", m.title),
+        onclick: () => assignFromLibrary(m),
+      },
+        el("div", { class: "name" }, m.title),
+        el("div", { class: "macros" },
+          round(m.nutrition.protein_g) + "g P · " + round(m.nutrition.kcal) + " kcal · " +
+          m.nutrition.iron_mg + "mg Fe · " + m.hours + "h"),
+        el("div", { class: "tags" },
+          m.categories.map(c => el("span", { class: "tag" }, c)),
+          m.saleIngredients.slice(0, 4).map(i => el("span", { class: "tag sale" }, "🏷 " + i)),
+          m.saleIngredients.length > 4 ? el("span", { class: "tag sale" }, "+" + (m.saleIngredients.length - 4)) : null)));
+    }
+  }
+
+  function assignFromLibrary(meal) {
+    if (!selected) {
+      // Default: first empty slot in this week that the meal fits
+      for (const d of weekDates()) for (const s of SLOTS) {
+        if (!getMeal(d, s) && meal.categories.includes(s)) {
+          setMeal(d, s, meal); saveState(); render();
+          toast("Added to " + fmtDay.format(d) + " " + s);
+          return;
+        }
+      }
+      toast("No empty " + meal.categories.join("/") + " slot this week");
+      return;
+    }
+    const date = new Date(selected.date + "T00:00");
+    setMeal(date, selected.slot, meal);
+
+    // Move selection to the next empty slot of the same type
+    const dates = weekDates();
+    const start = dates.findIndex(d => iso(d) === selected.date);
+    selected = null;
+    for (let i = start + 1; i < dates.length; i++) {
+      const s = document.getElementById("catFilter").value || meal.categories[0];
+      if (!getMeal(dates[i], s)) { selected = { date: iso(dates[i]), slot: s }; break; }
+    }
+    saveState();
+    render();
+  }
+
+  function shoppingItems() {
+    const items = new Map(); // key -> {name, count, offers}
+    for (const d of weekDates()) for (const s of SLOTS) {
+      const m = getMeal(d, s);
+      if (!m) continue;
+      for (const ing of m.ingredients) {
+        const key = ingKey(ing);
+        const item = items.get(key) || { key, name: ing, count: 0, offers: offersByKey.get(key) || [] };
+        if (item.name === item.name.toLowerCase()) item.name = ing;
+        item.count++;
+        items.set(key, item);
+      }
+    }
+    return [...items.values()].sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  function renderShopping() {
+    const wrap = document.getElementById("shopping");
+    wrap.innerHTML = "";
+    const items = shoppingItems();
+    if (!items.length) { wrap.append(el("div", { class: "empty" }, "Plan some meals to build your list.")); return; }
+
+    const checkedForWeek = state.checked[iso(weekStart)] || {};
+    const row = item => el("li", { class: checkedForWeek[item.key] ? "done" : "" },
+      el("input", {
+        type: "checkbox", checked: !!checkedForWeek[item.key], onchange: e => {
+          const wk = state.checked[iso(weekStart)] = state.checked[iso(weekStart)] || {};
+          if (e.target.checked) wk[item.key] = true; else delete wk[item.key];
+          saveState(); renderShopping();
+        }
+      }),
+      el("div", { class: "item" }, item.name,
+        item.offers.length ? el("div", { class: "offer" },
+          "🏷 " + item.offers[0].title + " · " + item.offers[0].store + " " + euro(item.offers[0].price) +
+          (item.offers[0].regularPrice ? " (was " + euro(item.offers[0].regularPrice) + ")" : "") +
+          (item.offers.length > 1 ? " · +" + (item.offers.length - 1) + " more" : "")) : null),
+      el("span", { class: "count" }, "×" + item.count));
+
+    const onSale = items.filter(i => i.offers.length);
+    const rest = items.filter(i => !i.offers.length);
+    if (onSale.length) wrap.append(el("h4", {}, "On offer this week (" + onSale.length + ")"), el("ul", {}, onSale.map(row)));
+    wrap.append(el("h4", {}, "Everything else (" + rest.length + ")"), el("ul", {}, rest.map(row)));
+  }
+
+  function renderStats() {
+    const wrap = document.getElementById("stats");
+    wrap.innerHTML = "";
+    const dates = weekDates();
+    const plannedDays = dates.filter(d => SLOTS.some(s => getMeal(d, s)));
+    const n = Math.max(plannedDays.length, 1);
+    const sums = Object.fromEntries(NUTRIENTS.map(x => [x.key, 0]));
+    let mealsPlanned = 0, mealsOnSale = 0;
+    for (const d of dates) for (const s of SLOTS) {
+      const m = getMeal(d, s);
+      if (!m) continue;
+      mealsPlanned++;
+      if (m.saleIngredients.length) mealsOnSale++;
+      for (const x of NUTRIENTS) sums[x.key] += m.nutrition[x.key] || 0;
+    }
+
+    let savings = 0;
+    for (const item of shoppingItems()) {
+      const o = item.offers[0];
+      if (o && o.regularPrice && o.price != null) savings += o.regularPrice - o.price;
+    }
+
+    const stat = (k, v, g) => el("div", { class: "stat" }, el("div", { class: "k" }, k), el("div", { class: "v" }, v), el("div", { class: "g" }, g));
+    wrap.append(
+      stat("Meals planned /week", mealsPlanned, "of " + SLOTS.length * 7 + " slots"),
+      stat("Use offers /week", mealsOnSale, "meals with 🏷 items"),
+      stat("Est. savings /week", savings ? euro(savings) : "–", "vs. regular price"));
+    for (const x of NUTRIENTS) {
+      wrap.append(stat("Avg " + x.label + " /day", round(sums[x.key] / n) + x.unit, "goal " + state.goals[x.key] + x.unit));
+    }
+  }
+
+  function renderGoals() {
+    const wrap = document.getElementById("goalInputs");
+    wrap.innerHTML = "";
+    for (const n of NUTRIENTS) {
+      wrap.append(el("label", {}, n.label + (n.unit ? " (" + n.unit + ")" : ""),
+        el("input", {
+          type: "number", min: "0", value: state.goals[n.key], onchange: e => {
+            state.goals[n.key] = Number(e.target.value) || 0; saveState(); render();
+          }
+        })));
+    }
+  }
+
+  function render() {
+    renderWeekLabel();
+    renderWeek();
+    renderLibrary();
+    renderStats();
+    renderShopping();
+  }
+
+  // ----------------------------------------------------------------
+  // Export
+  // ----------------------------------------------------------------
+
+  function download(name, text, type) {
+    const a = el("a", { href: URL.createObjectURL(new Blob([text], { type })), download: name });
+    document.body.append(a); a.click(); a.remove();
+  }
+
+  function icsDate(d) {
+    return d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0") +
+      "T" + String(d.getHours()).padStart(2, "0") + String(d.getMinutes()).padStart(2, "0") + "00";
+  }
+  function icsEscape(s) { return s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n"); }
+
+  function exportIcs() {
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//ProTeen//Planner//EN", "X-WR-CALNAME:ProTeen Meal Plan"];
+    const stamp = icsDate(new Date());
+    let count = 0;
+    for (const d of weekDates()) for (const s of SLOTS) {
+      const m = getMeal(d, s);
+      if (!m) continue;
+      const [h, min] = SLOT_TIMES[s].split(":").map(Number);
+      const start = new Date(d.getFullYear(), d.getMonth(), d.getDate(), h, min);
+      const end = new Date(start.getTime() + m.hours * 3600000);
+      const nut = m.nutrition;
+      const desc = "Protein: " + nut.protein_g + "g\nCalories: " + nut.kcal + " kcal\nFat: " + nut.fat_g +
+        "g\nCarbs: " + nut.carbs_g + "g\nIron: " + nut.iron_mg + "mg\nFiber: " + nut.fiber_g + "g" +
+        "\n\nIngredients: " + m.ingredients.join(", ");
+      lines.push("BEGIN:VEVENT", "UID:" + slotId(d, s).replace("|", "-") + "@proteen", "DTSTAMP:" + stamp,
+        "DTSTART:" + icsDate(start), "DTEND:" + icsDate(end), "SUMMARY:" + icsEscape(m.title),
+        "DESCRIPTION:" + icsEscape(desc), "END:VEVENT");
+      count++;
+    }
+    lines.push("END:VCALENDAR");
+    if (!count) { toast("Nothing planned this week"); return; }
+    download("meal_plan_" + iso(weekStart) + ".ics", lines.join("\r\n"), "text/calendar");
+  }
+
+  function shoppingText() {
+    return shoppingItems().map(i => {
+      const o = i.offers[0];
+      return o ? i.name + " — " + o.title + " @ " + o.store + " " + euro(o.price) : i.name;
+    }).join("\n");
+  }
+
+  let toastTimer;
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+  }
+
+  // ----------------------------------------------------------------
+  // Wiring
+  // ----------------------------------------------------------------
+
+  document.getElementById("prevWeek").onclick = () => { weekStart = addDays(weekStart, -7); selected = null; render(); };
+  document.getElementById("nextWeek").onclick = () => { weekStart = addDays(weekStart, 7); selected = null; render(); };
+  document.getElementById("thisWeek").onclick = () => { weekStart = mondayOf(new Date()); selected = null; render(); };
+  document.getElementById("autoFill").onclick = () => autoFill(false);
+  document.getElementById("reshuffle").onclick = () => {
+    if (confirm("Replace every meal this week with a new plan?")) autoFill(true);
+  };
+  document.getElementById("clearWeek").onclick = () => {
+    if (!confirm("Clear all meals this week?")) return;
+    for (const d of weekDates()) for (const s of SLOTS) setMeal(d, s, null);
+    saveState(); render();
+  };
+  document.getElementById("exportIcs").onclick = exportIcs;
+  document.getElementById("copyList").onclick = () => {
+    const text = shoppingText();
+    if (!text) return toast("List is empty");
+    navigator.clipboard.writeText(text).then(() => toast("Copied"), () => toast("Copy failed"));
+  };
+  document.getElementById("downloadList").onclick = () => {
+    // Same format as scheduler.py's shopping_list.txt (one ingredient per line, sorted)
+    const names = new Set();
+    for (const d of weekDates()) for (const s of SLOTS) {
+      const m = getMeal(d, s);
+      if (m) m.ingredients.forEach(i => names.add(i));
+    }
+    if (!names.size) return toast("List is empty");
+    const sorted = [...names].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+    download("shopping_list.txt", sorted.join("\n") + "\n", "text/plain");
+  };
+
+  // ----------------------------------------------------------------
+  // Save to project (only when served by planner.py)
+  // ----------------------------------------------------------------
+
+  const SERVER_MODE = location.protocol.startsWith("http");
+  let lastReport = null;
+
+  function weekPlan() {
+    const plan = [];
+    for (const d of weekDates()) for (const s of SLOTS) {
+      const m = getMeal(d, s);
+      if (m) plan.push({ date: iso(d), slot: s, title: m.title });
+    }
+    return plan;
+  }
+
+  function showReport() {
+    const dialog = document.getElementById("reportDialog");
+    document.getElementById("reportFiles").textContent = lastReport.files.length
+      ? "Saved to the ProTeen folder: " + lastReport.files.join(", ")
+      : "Preview only. Click \u201cSave to ProTeen\u201d to write the files.";
+    document.getElementById("reportText").textContent = lastReport.report;
+    dialog.showModal();
+  }
+
+  async function savePlan(openReport) {
+    if (!SERVER_MODE) {
+      toast("Start the planner with: python3 planner.py");
+      return;
+    }
+    const plan = weekPlan();
+    if (!plan.length) { toast("Nothing planned this week"); return; }
+    try {
+      const resp = await fetch(openReport ? "/api/report" : "/api/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, goals: state.goals }),
+      });
+      const result = await resp.json();
+      if (!resp.ok) throw new Error(result.error || resp.statusText);
+      lastReport = result;
+      if (openReport) showReport();
+      else toast("Saved " + result.meals + " meals → " + result.files.join(", "));
+    } catch (e) {
+      toast("Save failed: " + e.message);
+    }
+  }
+
+  document.getElementById("savePlan").onclick = () => savePlan(false);
+  document.getElementById("showReport").onclick = () => savePlan(true);
+  document.getElementById("closeReport").onclick = () => document.getElementById("reportDialog").close();
+  if (!SERVER_MODE) {
+    document.getElementById("savePlan").title = "Run python3 planner.py to save into the ProTeen folder";
+  }
+  for (const id of ["search", "catFilter", "sortBy", "saleOnly"]) {
+    document.getElementById(id).addEventListener("input", renderLibrary);
+  }
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && selected) { selected = null; render(); }
+  });
+
+  renderBanner();
+  renderGoals();
+  render();
+})();
+</script>
+</body>
+</html>

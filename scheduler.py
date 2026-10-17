@@ -425,6 +425,73 @@ LOCATION:{EVENT_ADDRESS}"""
 
 
 # ------------------------------------------------------------------
+# Output Writers (shared with planner.py)
+# ------------------------------------------------------------------
+
+
+def write_shopping_list(ingredients, list_filename=OUTPUT_SHOPPING_LIST_FILENAME):
+    with open(list_filename, "w") as f:
+        for item in sorted(ingredients):
+            f.write(f"{item}\n")
+    return list_filename
+
+
+def write_nutrition_report(daily_nutrition_totals, nutrition_goals, report_filename="nutrition_report.txt"):
+    """
+    daily_nutrition_totals: {date: {nutrient: total}}
+    """
+    with open(report_filename, "w") as f:
+        f.write("=" * 60 + "\n")
+        f.write("NUTRITIONAL REPORT\n")
+        f.write("=" * 60 + "\n\n")
+        
+        # Daily breakdown
+        f.write("DAILY BREAKDOWN:\n")
+        f.write("-" * 60 + "\n")
+        
+        for date in sorted(daily_nutrition_totals.keys()):
+            nutrition = daily_nutrition_totals[date]
+            f.write(f"\n{date.strftime('%A, %B %d, %Y')}:\n")
+            f.write(f"  Protein:  {nutrition['protein_g']:6.1f}g  (Goal: {nutrition_goals['protein_g']:.0f}g)\n")
+            f.write(f"  Calories: {nutrition['kcal']:6.0f}    (Goal: {nutrition_goals['kcal']:.0f})\n")
+            f.write(f"  Fat:      {nutrition['fat_g']:6.1f}g  (Goal: {nutrition_goals['fat_g']:.0f}g)\n")
+            f.write(f"  Carbs:    {nutrition['carbs_g']:6.1f}g  (Goal: {nutrition_goals['carbs_g']:.0f}g)\n")
+            f.write(f"  Iron:     {nutrition['iron_mg']:6.1f}mg (Goal: {nutrition_goals['iron_mg']:.0f}mg)\n")
+            f.write(f"  Fiber:    {nutrition['fiber_g']:6.1f}g  (Goal: {nutrition_goals['fiber_g']:.0f}g)\n")
+        
+        # Weekly averages
+        if len(daily_nutrition_totals) > 0:
+            f.write("\n" + "=" * 60 + "\n")
+            f.write("WEEKLY AVERAGES:\n")
+            f.write("-" * 60 + "\n")
+            
+            num_days = len(daily_nutrition_totals)
+            totals = {
+                "protein_g": 0.0,
+                "kcal": 0.0,
+                "fat_g": 0.0,
+                "carbs_g": 0.0,
+                "iron_mg": 0.0,
+                "fiber_g": 0.0,
+            }
+            
+            for nutrition in daily_nutrition_totals.values():
+                for nutrient in totals:
+                    totals[nutrient] += nutrition[nutrient]
+            
+            f.write(f"\nAverage over {num_days} days:\n")
+            f.write(f"  Protein:  {totals['protein_g']/num_days:6.1f}g  (Goal: {nutrition_goals['protein_g']:.0f}g)\n")
+            f.write(f"  Calories: {totals['kcal']/num_days:6.0f}    (Goal: {nutrition_goals['kcal']:.0f})\n")
+            f.write(f"  Fat:      {totals['fat_g']/num_days:6.1f}g  (Goal: {nutrition_goals['fat_g']:.0f}g)\n")
+            f.write(f"  Carbs:    {totals['carbs_g']/num_days:6.1f}g  (Goal: {nutrition_goals['carbs_g']:.0f}g)\n")
+            f.write(f"  Iron:     {totals['iron_mg']/num_days:6.1f}mg (Goal: {nutrition_goals['iron_mg']:.0f}mg)\n")
+            f.write(f"  Fiber:    {totals['fiber_g']/num_days:6.1f}g  (Goal: {nutrition_goals['fiber_g']:.0f}g)\n")
+            f.write("\n" + "=" * 60 + "\n")
+
+    return report_filename
+
+
+# ------------------------------------------------------------------
 # Schedule & Shopping List (UNCHANGED API)
 # ------------------------------------------------------------------
 
@@ -549,61 +616,11 @@ def create_schedule_and_list(
     with open(ics_filename, "w") as f:
         f.write("\n".join(ics_content))
 
-    with open(list_filename, "w") as f:
-        for item in sorted(unique_ingredients):
-            f.write(f"{item}\n")
+    write_shopping_list(unique_ingredients, list_filename)
     
     # Generate nutrition report if we have nutritional data
     if daily_nutrition_totals and nutrition_goals:
-        report_filename = "nutrition_report.txt"
-        with open(report_filename, "w") as f:
-            f.write("=" * 60 + "\n")
-            f.write("NUTRITIONAL REPORT\n")
-            f.write("=" * 60 + "\n\n")
-            
-            # Daily breakdown
-            f.write("DAILY BREAKDOWN:\n")
-            f.write("-" * 60 + "\n")
-            
-            for date in sorted(daily_nutrition_totals.keys()):
-                nutrition = daily_nutrition_totals[date]
-                f.write(f"\n{date.strftime('%A, %B %d, %Y')}:\n")
-                f.write(f"  Protein:  {nutrition['protein_g']:6.1f}g  (Goal: {nutrition_goals['protein_g']:.0f}g)\n")
-                f.write(f"  Calories: {nutrition['kcal']:6.0f}    (Goal: {nutrition_goals['kcal']:.0f})\n")
-                f.write(f"  Fat:      {nutrition['fat_g']:6.1f}g  (Goal: {nutrition_goals['fat_g']:.0f}g)\n")
-                f.write(f"  Carbs:    {nutrition['carbs_g']:6.1f}g  (Goal: {nutrition_goals['carbs_g']:.0f}g)\n")
-                f.write(f"  Iron:     {nutrition['iron_mg']:6.1f}mg (Goal: {nutrition_goals['iron_mg']:.0f}mg)\n")
-                f.write(f"  Fiber:    {nutrition['fiber_g']:6.1f}g  (Goal: {nutrition_goals['fiber_g']:.0f}g)\n")
-            
-            # Weekly averages
-            if len(daily_nutrition_totals) > 0:
-                f.write("\n" + "=" * 60 + "\n")
-                f.write("WEEKLY AVERAGES:\n")
-                f.write("-" * 60 + "\n")
-                
-                num_days = len(daily_nutrition_totals)
-                totals = {
-                    "protein_g": 0.0,
-                    "kcal": 0.0,
-                    "fat_g": 0.0,
-                    "carbs_g": 0.0,
-                    "iron_mg": 0.0,
-                    "fiber_g": 0.0,
-                }
-                
-                for nutrition in daily_nutrition_totals.values():
-                    for nutrient in totals:
-                        totals[nutrient] += nutrition[nutrient]
-                
-                f.write(f"\nAverage over {num_days} days:\n")
-                f.write(f"  Protein:  {totals['protein_g']/num_days:6.1f}g  (Goal: {nutrition_goals['protein_g']:.0f}g)\n")
-                f.write(f"  Calories: {totals['kcal']/num_days:6.0f}    (Goal: {nutrition_goals['kcal']:.0f})\n")
-                f.write(f"  Fat:      {totals['fat_g']/num_days:6.1f}g  (Goal: {nutrition_goals['fat_g']:.0f}g)\n")
-                f.write(f"  Carbs:    {totals['carbs_g']/num_days:6.1f}g  (Goal: {nutrition_goals['carbs_g']:.0f}g)\n")
-                f.write(f"  Iron:     {totals['iron_mg']/num_days:6.1f}mg (Goal: {nutrition_goals['iron_mg']:.0f}mg)\n")
-                f.write(f"  Fiber:    {totals['fiber_g']/num_days:6.1f}g  (Goal: {nutrition_goals['fiber_g']:.0f}g)\n")
-                f.write("\n" + "=" * 60 + "\n")
-        
+        report_filename = write_nutrition_report(daily_nutrition_totals, nutrition_goals)
         print(f"✅ Nutrition report created: {report_filename}")
 
     return ics_filename, list_filename

@@ -117,6 +117,66 @@ python3 scheduler.py -nm \
 4. Confirm the import.
 5. Open any event to view nutritional information in the description.
 
+## 🏷️ REWE Discounts (`discounts.py`)
+
+Fetches this week's offers from your REWE market and matches them (German product names) to the ingredients in `Meals.csv`. Output: `discounts.json`.
+
+### 1. Find your market ID
+```bash
+python3 discounts.py --postcode 53757
+```
+
+### 2. Get the REWE client certificate (one-time)
+REWE's offers API only answers requests made with the client certificate built into the REWE Android app. It isn't included here. Extract `certificate.pem` and `private.key` from the app following the [rewerse-engineering guide](https://github.com/ByteSizedMarius/rewerse-engineering/tree/main/docs) and put them in this folder. They're git-ignored.
+
+> ⚠️ This is an unofficial, undocumented API. It may stop working without notice, and you are responsible for making sure your use complies with REWE's terms.
+
+### 3. Fetch offers
+```bash
+python3 discounts.py --market 1940302 --market-name "REWE Beuel"
+```
+
+### Other stores (manual)
+Add offers from any flyer (Lidl, Aldi, …) to a CSV and pass it with `--manual`. It can be used alone or together with `--market`:
+```csv
+store,title,price,regularPrice,subtitle
+Lidl,Milbona Paneer,2.49,2.99,200g
+Aldi,Kichererbsen,0.69,,Dose
+```
+```bash
+python3 discounts.py --manual offers.csv
+```
+
+New ingredients are matched through the `INGREDIENT_KEYWORDS` table in `discounts.py` (English ingredient → German keywords + exclusions).
+
+## 🗓️ Interactive Planner (`planner.html`)
+
+```bash
+python3 planner.py
+```
+This starts a small local server (only reachable from your Mac, at `http://127.0.0.1:8765`) and opens the planner. Edits to `Meals.csv` or a fresh `discounts.json` show up when you refresh the page. Stop it with `Ctrl+C`.
+
+- **Week grid** (Breakfast, Lunch, Snack, Dinner). Click a slot, then a meal, or drag meals onto slots. ↻ suggests an alternative.
+- **Auto-fill** uses the same nutrition-gap scoring as `scheduler.py`, can favour meals with discounted ingredients, and avoids repeating meals.
+- **Live nutrition bars** per day and weekly averages against your goals (editable under *Daily goals*).
+- **Shopping list** that puts discounted items first, with store, offer price and regular price. Tick items off as you shop.
+
+### Saving into the project
+
+**Save to ProTeen** writes the week you're viewing to the same files, in the same formats, as `scheduler.py`:
+
+| File | Contents |
+| :--- | :--- |
+| `meal_plan.ics` | Calendar events; times start at each meal window in `DEFAULT_MEAL_TIMES` |
+| `shopping_list.txt` | One ingredient per line, sorted (works with `Shopping.shortcut`) |
+| `nutrition_report.txt` | Daily breakdown + weekly averages against your goals |
+
+**Nutrition report** shows the report for the current week without writing any files. **Download** on the shopping list saves a `shopping_list.txt` in the same format, and **Copy** includes the offer details.
+
+Your plan is also kept in the browser (localStorage), so it's still there next time.
+
+> Without the server: `python3 planner.py --static` only writes `planner_data.js`, so you can open `planner.html` as a file. Saving into the project is disabled in that mode.
+
 ## 🤝 Contribution
 Feel free to fork this repository, open issues for suggestions, or submit pull requests!
 
